@@ -100,8 +100,8 @@ function onGalleryElement(evt) {
 	}
 	evt.preventDefault();
 	modal.classList.add("is-open");
-	modalImage.src = evt.target.dataset.source;
-	modalImage.alt = evt.target.alt;
+	const { dataset, alt } = evt.target;
+	updateAttr(dataset.source, alt);
 }
 
 const modalClose = document.querySelector('[data-action="close-lightbox"]');
@@ -109,8 +109,12 @@ modalClose.addEventListener("click", onModalCloseClick);
 
 function onModalCloseClick(evt) {
 	modal.classList.remove("is-open");
-	modalImage.src = "";
-	modalImage.alt = "";
+	updateAttr();
+}
+
+function updateAttr(src = "", alt = "") {
+	modalImage.src = src;
+	modalImage.alt = alt;
 }
 
 window.addEventListener("keydown", closeModalKey);

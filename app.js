@@ -92,16 +92,14 @@ function originalItem(origin) {
 
 galleryEl.addEventListener("click", onGalleryElement);
 const modal = document.querySelector(".js-lightbox");
+const modalImage = document.querySelector(".lightbox__image");
 
 function onGalleryElement(evt) {
 	if (!evt.target.classList.contains("gallery__image")) {
 		return;
 	}
 	evt.preventDefault();
-
 	modal.classList.add("is-open");
-
-	const modalImage = document.querySelector(".lightbox__image");
 	modalImage.src = evt.target.dataset.source;
 	modalImage.alt = evt.target.alt;
 }
@@ -111,6 +109,8 @@ modalClose.addEventListener("click", onModalCloseClick);
 
 function onModalCloseClick(evt) {
 	modal.classList.remove("is-open");
+	modalImage.src = "";
+	modalImage.alt = "";
 }
 
 window.addEventListener("keydown", closeModalKey);
